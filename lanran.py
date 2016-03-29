@@ -107,19 +107,30 @@ if __name__=='__main__':
         for y in xrange(46):
             if x != y:
                 z = getr(lettors[x],lettors[y],d)
-                if len(z)==4:
-                    #lettorsz = [ lettors[z[0]], lettors[z[1]], lettors[z[2]], lettors[z[3]],]
+                if len(z)==4 or len(z)==3:
                     total.append(z)
     xnyn = []
     for x in xrange(len(total)):
         x1 = total[x]
+        xend = len(x1)-1
         for y in xrange(len(total)):
-            if len(getp(total[x][3],total[y][0],d))==2:
+
+            if len(getp(total[x][xend],total[y][0],d))<=2 or len(getp(total[x][0],total[y][0],d))<=2:
                 y1=total[y]
-                xnyn.append([x1[0],x1[1],x1[2],x1[3],y1[0],y1[1],y1[2],y1[3]])
+                x1y1=[]
+                for i in xrange(len(x1)):
+                    x1y1.append(x1[i])
+                for j in xrange(len(y1)):
+                    x1y1.append(y1[j])
+                xnyn.append(x1y1)
     fl=open('list.txt', 'w')
+
     for x in xrange(len(xnyn)):
         i = xnyn[x]
-        fl.write( lettors[i[0]]+lettors[i[1]]+lettors[i[2]]+lettors[i[3]]+lettors[i[4]]+lettors[i[5]]+lettors[i[6]]+lettors[i[7]])
+        line = ""
+        for j in xrange(len(i)):
+            line += lettors[i[j]]
+        fl.write(line)
         fl.write("\n")
     fl.close()
+    print(len(xnyn))
