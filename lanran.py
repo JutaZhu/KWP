@@ -48,11 +48,16 @@ def getr(i,j,d):
     j = lettors.find(j)
     r = [i]
     newi = i
-    for a1 in xrange(46):
-        if d[newi][a1]+d[j][a1]==d[newi][j]:
-            if len(getp(newi,a1,d))==2:
-                r.append(a1)
-                newi = a1
+    t = True
+    while t:
+        t = False
+        for a1 in xrange(46):
+            if d[newi][a1]+d[j][a1]==d[newi][j]:
+                if len(getp(newi,a1,d))==2:
+                    r.append(a1)
+                    newi = a1
+                    t = True
+                    #print a1
     return r
 
 if __name__=='__main__':
@@ -96,7 +101,7 @@ if __name__=='__main__':
     for x in xrange(len(r)):
         print(lettors[r[x]])
 
-'''
+
     total = []
     for x in xrange(46):
         for y in xrange(46):
@@ -105,7 +110,6 @@ if __name__=='__main__':
                 if len(z)==4:
                     #lettorsz = [ lettors[z[0]], lettors[z[1]], lettors[z[2]], lettors[z[3]],]
                     total.append(z)
-
     xnyn = []
     for x in xrange(len(total)):
         x1 = total[x]
@@ -113,12 +117,9 @@ if __name__=='__main__':
             if len(getp(total[x][3],total[y][0],d))==2:
                 y1=total[y]
                 xnyn.append([x1[0],x1[1],x1[2],x1[3],y1[0],y1[1],y1[2],y1[3]])
-
     fl=open('list.txt', 'w')
     for x in xrange(len(xnyn)):
         i = xnyn[x]
         fl.write( lettors[i[0]]+lettors[i[1]]+lettors[i[2]]+lettors[i[3]]+lettors[i[4]]+lettors[i[5]]+lettors[i[6]]+lettors[i[7]])
         fl.write("\n")
     fl.close()
-
-'''
